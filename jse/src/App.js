@@ -1,23 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store/store";
 import HomePage from "./components/HomePage";
-import CompanyDetails from "./components/CompanyDetails";
+import Favourites from "./components/Favourites";
 
 function App() {
-  const [jobs, setJobs] = useState([]);
   return (
-    <div>
-      <BrowserRouter>
-        <HomePage jobs={jobs} setJobs={setJobs} />
+    <Provider store={store}>
+      <Router>
         <Routes>
-          <Route exact path="/comapanyDetails" compponent={CompanyDetails} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/favourites" element={<Favourites />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </Router>
+    </Provider>
   );
 }
 
